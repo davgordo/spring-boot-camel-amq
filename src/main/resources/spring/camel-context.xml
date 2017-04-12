@@ -25,7 +25,7 @@
             <!-- this is a rest POST to create a new order -->
             <post uri="/">
                 <description>Place an order</description>
-                <to uri="direct:placeOrder" />
+                <to uri="seda:placeOrder" />
             </post>
         </rest>
 
@@ -36,7 +36,7 @@
             business logging statements. They make it easier to see what the route is
             doing. The amq component ensures to use the broker in the kubernetes cluster. -->
         <route id="generate-order-route" streamCache="true">
-            <from id="route-entry" uri="direct:placeOrder" />
+            <from id="route-entry" uri="seda:placeOrder" />
             <log id="route-log-order" message="Generating order ${file:name}" />
             <to id="route-to-incoming-orders" uri="amq:incomingOrders" />
         </route>

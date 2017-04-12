@@ -38,7 +38,7 @@
         <route id="generate-order-route" streamCache="true">
             <from id="route-entry" uri="seda:placeOrder" />
             <log id="route-log-order" message="Generating order ${file:name}" />
-            <to id="route-to-incoming-orders" uri="amq:incomingOrders" />
+            <to id="route-to-incoming-orders" uri="amq:incomingOrders?exchangePattern=InOnly" />
         </route>
         <!-- This route consumes messages from the JMS queue incomingOrders on
             the ActiveMQ broker within the ESB. The <choice/> element contains the content
